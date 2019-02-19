@@ -5,6 +5,8 @@ import MUIDataTable from 'mui-datatables';
 import ReactMarkdown from 'react-markdown';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
+import * as helpers from './helpers';
+
 function TableComponent({
   classes,
   title,
@@ -12,6 +14,7 @@ function TableComponent({
   data,
 }) {
   const options = {
+    // responsive: 'scroll',
     selectableRows: false,
     rowsPerPage: 10,
     rowsPerPageOptions: [10, 25, 50, 100],
@@ -26,18 +29,18 @@ function TableComponent({
       name,
       options: {
         customBodyRender: (value, tableMeta, updateValue) => {
-          const maxNoteLength = 100;
-          let note = "";
-          if (value) {
-            value = value.replace(/<br>/gi, '\n');
-            if (value.length <= (maxNoteLength - 3)) {
-              note = value;
-            } else {
-              note = value.substring(0,maxNoteLength) + '...';
-            }
-          }
+          value = value.replace(/<br>/gi, '\n');
           return (
-            <ReactMarkdown source={note} />
+            <div
+              contentEditable
+              onBlur={(e)=>{
+                const html = e.target.innerHTML;
+                const markdown = helpers.htmlToMarkdown(html);
+                updateValue(markdown);
+              }}
+            >
+              <ReactMarkdown source={value} />
+            </div>
           );
         },
       }
