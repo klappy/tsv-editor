@@ -15,6 +15,8 @@ function TableComponent({
 }) {
   const options = {
     // responsive: 'scroll',
+    // fixedHeader: true,
+    resizableColumns: true,
     selectableRows: false,
     rowsPerPage: 10,
     rowsPerPageOptions: [10, 25, 50, 100],
@@ -79,13 +81,18 @@ const getMuiTheme = () => createMuiTheme({
     MuiTableCell: {
       root: {
         padding: "0 8px 0 8px",
-        maxWidth: "33%",
+        maxWidth: "125em",
       }
     },
     MuiTableRow: {
       root: {
         height: 'unset',
       }
+    },
+    MUIDataTable: {
+      responsiveScroll: {
+        maxHeight: 'unset',
+      },
     },
   }
 });
