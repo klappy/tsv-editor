@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import MUIDataTable from 'mui-datatables';
 import ReactMarkdown from 'react-markdown';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 function TableComponent({
   classes,
@@ -19,7 +20,7 @@ function TableComponent({
       separator: '\t',
     },
   };
-  
+
   if (columns) {
     columns = columns.map(name => ({
       name,
@@ -45,12 +46,14 @@ function TableComponent({
 
   return (
     <div className={classes.root}>
-      <MUIDataTable
-        title={title}
-        data={data}
-        columns={columns}
-        options={options}
-      />
+      <MuiThemeProvider theme={getMuiTheme()}>
+        <MUIDataTable
+          title={title}
+          data={data}
+          columns={columns}
+          options={options}
+        />
+      </MuiThemeProvider>
     </div>
   );
 };
@@ -66,6 +69,21 @@ const styles = theme => ({
   root: {
     padding: '1em',
   },
+});
+
+const getMuiTheme = () => createMuiTheme({
+  overrides: {
+    MuiTableCell: {
+      root: {
+        padding: "0 8px 0 8px",
+      }
+    },
+    MuiTableRow: {
+      root: {
+        height: 'unset',
+      }
+    },
+  }
 });
 
 export default withStyles(styles)(TableComponent);
