@@ -1,28 +1,17 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+import Table from './Table';
+import FileOpen from './FileOpen';
+
+const App = () => {
+  const [file, setFile] = useState({});
+  return (
+    <div className="App">
+      <Table title={file.title} columns={file.columns} data={file.data} />
+      <FileOpen setFile={setFile.bind(this)} />
+    </div>
+  );
+};
 
 export default App;
