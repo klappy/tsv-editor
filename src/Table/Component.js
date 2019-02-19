@@ -11,6 +11,7 @@ function TableComponent({
   data,
 }) {
   const options = {
+    selectableRows: false,
     rowsPerPage: 10,
     rowsPerPageOptions: [10, 25, 50, 100],
     downloadOptions: {
@@ -18,6 +19,7 @@ function TableComponent({
       separator: '\t',
     },
   };
+  
   if (columns) {
     columns = columns.map(name => ({
       name,

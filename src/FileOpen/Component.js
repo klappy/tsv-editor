@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { FilePicker } from 'react-file-picker';
 import { withStyles } from '@material-ui/core/styles';
 import {
-  Fab,
 } from '@material-ui/core';
 import {
   CloudUpload,
@@ -27,9 +26,7 @@ const FileOpenComponent = ({
         alert(errMsg);
       }}
     >
-      <Fab color="primary" aria-label="Add" className={classes.fab}>
-        <CloudUpload />
-      </Fab>
+      <CloudUpload />
     </FilePicker>
   );
 };
