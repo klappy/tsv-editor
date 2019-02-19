@@ -26,7 +26,7 @@ function TableComponent({
       name,
       options: {
         customBodyRender: (value, tableMeta, updateValue) => {
-          const maxNoteLength = 500;
+          const maxNoteLength = 100;
           let note = "";
           if (value) {
             value = value.replace(/<br>/gi, '\n');
