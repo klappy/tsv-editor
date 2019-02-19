@@ -79,6 +79,7 @@ const getMuiTheme = () => createMuiTheme({
     MuiTableCell: {
       root: {
         padding: "0 8px 0 8px",
+        maxWidth: "33%",
       }
     },
     MuiTableRow: {
