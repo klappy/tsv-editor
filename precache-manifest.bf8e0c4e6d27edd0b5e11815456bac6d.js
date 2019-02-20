@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "81ea520ae4707a76d3fc",
+    "revision": "292284e19520aff477f0",
     "url": "/tsv-editor/static/css/main.2da34b64.chunk.css"
   },
   {
-    "revision": "81ea520ae4707a76d3fc",
-    "url": "/tsv-editor/static/js/main.81ea520a.chunk.js"
+    "revision": "292284e19520aff477f0",
+    "url": "/tsv-editor/static/js/main.292284e1.chunk.js"
   },
   {
     "revision": "269198745a29f64decdc",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/tsv-editor/static/js/2.0d5716e1.chunk.js"
   },
   {
-    "revision": "4428db15a03ef4515b0288f556d7238f",
+    "revision": "0df4a135c4793f977e98b14f9fee0842",
     "url": "/tsv-editor/index.html"
   }
 ];
