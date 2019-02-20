@@ -34,6 +34,7 @@ const TableComponent = ({
   const options = {
     // responsive: 'scroll',
     // fixedHeader: true,
+    print: false,
     resizableColumns: true,
     selectableRows: false,
     rowsPerPage: rowsPerPage,
