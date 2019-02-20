@@ -10,11 +10,11 @@ import {
 
 import FileOpen from './FileOpen';
 
-function ApplicationBar({
+const ApplicationBar = ({
   classes,
   file,
   setFile,
-}) {
+}) => {
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -33,6 +33,8 @@ function ApplicationBar({
 
 ApplicationBar.propTypes = {
   classes: PropTypes.object.isRequired,
+  file: PropTypes.object.isRequired,
+  setFile: PropTypes.func.isRequired,
 };
 
 const styles = {

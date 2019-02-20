@@ -26,6 +26,15 @@ export const tsvParse = (text) => {
   return tsv;
 };
 
+export const tsvGenerate = (rows) => {
+  let tsv = "";
+  if (rows) {
+    tsv = rows.map(cells => cells.join('\t'))
+    .join('\n');
+  }
+  return tsv;
+};
+
 export const pFileReader = (fileObject) => {
   return new Promise((resolve, reject) => {
     var fileReader = new FileReader();

@@ -1,53 +1,49 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import MUIDataTable from 'mui-datatables';
-import ReactMarkdown from 'react-markdown';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
-import * as helpers from './helpers';
+import Cell from './Cell';
+import CustomToolbar from './CustomToolbar';
 
-function TableComponent({
+const TableComponent = ({
   classes,
-  title,
-  columns,
-  data,
-}) {
+  setFile,
+  file,
+  file: {
+    title,
+    columns,
+    data,
+  },
+}) => {
+  const [rowsPerPage, setRowsPerPage] = useState(25);
+
+  let columnConfig;
+  if (columns) {
+    columnConfig = columns.map(name => ({
+      name,
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => (
+          <Cell value={value} tableMeta={tableMeta} file={file} setFile={setFile} />
+        ),
+      }
+    }));
+  }
+
   const options = {
     // responsive: 'scroll',
     // fixedHeader: true,
     resizableColumns: true,
     selectableRows: false,
-    rowsPerPage: 10,
-    rowsPerPageOptions: [10, 25, 50, 100],
-    downloadOptions: {
-      filename: title,
-      separator: '\t',
+    rowsPerPage: rowsPerPage,
+    rowsPerPageOptions: [25, 50, 100],
+    onChangeRowsPerPage: (numberOfRows) => {
+      setRowsPerPage(numberOfRows);
     },
+    download: false,
+    customToolbar: () => ( <CustomToolbar file={file} /> ),
   };
-
-  if (columns) {
-    columns = columns.map(name => ({
-      name,
-      options: {
-        customBodyRender: (value, tableMeta, updateValue) => {
-          value = value.replace(/<br>/gi, '\n');
-          return (
-            <div
-              contentEditable
-              onBlur={(e)=>{
-                const html = e.target.innerHTML;
-                const markdown = helpers.htmlToMarkdown(html);
-                updateValue(markdown);
-              }}
-            >
-              <ReactMarkdown source={value} />
-            </div>
-          );
-        },
-      }
-    }));
-  }
 
   return (
     <div className={classes.root}>
@@ -55,7 +51,7 @@ function TableComponent({
         <MUIDataTable
           title={title}
           data={data}
-          columns={columns}
+          columns={columnConfig}
           options={options}
         />
       </MuiThemeProvider>
@@ -65,9 +61,8 @@ function TableComponent({
 
 TableComponent.propTypes = {
   classes: PropTypes.object.isRequired,
-  title: PropTypes.string.isRequired,
-  columns: PropTypes.array.isRequired,
-  data: PropTypes.array.isRequired,
+  file: PropTypes.object.isRequired,
+  setFile: PropTypes.func.isRequired,
 };
 
 const styles = theme => ({
