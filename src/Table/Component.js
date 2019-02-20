@@ -73,13 +73,15 @@ const styles = theme => ({
 });
 
 const getMuiTheme = () => createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
   overrides: {
     MuiTableCell: {
       root: {
         padding: "0 8px 0 8px",
-        maxWidth: "125em",
         textAlign: "unset",
-      }
+      },
     },
     MuiTableRow: {
       root: {
@@ -89,6 +91,11 @@ const getMuiTheme = () => createMuiTheme({
     MUIDataTable: {
       responsiveScroll: {
         maxHeight: 'unset',
+      },
+    },
+    MUIDataTableBodyCell: {
+      root: {
+        maxWidth: "33%",
       },
     },
   }
