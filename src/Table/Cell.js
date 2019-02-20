@@ -14,6 +14,7 @@ const FileOpenComponent = ({
   const markdown = value.replace(/<br>/gi, '\n');
   return (
     <div
+      dir="auto"
       contentEditable
       onBlur={(e)=>{
         const html = e.target.innerHTML;
