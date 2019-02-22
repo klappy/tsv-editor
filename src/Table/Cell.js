@@ -4,12 +4,15 @@ import { withStyles } from '@material-ui/core/styles';
 
 import * as helpers from './helpers';
 
-const FileOpenComponent = ({
+const Cell = ({
   classes,
   value,
   tableMeta,
-  file,
-  setFile,
+  tableMeta: {
+    columnIndex,
+    rowIndex,
+  },
+  editCell,
 }) => {
   const markdown = value.replace(/<br>/gi, '\n');
   return (
@@ -18,12 +21,8 @@ const FileOpenComponent = ({
       contentEditable
       onBlur={(e)=>{
         const html = e.target.innerHTML;
-        const _markdown = helpers.htmlToMarkdown(html);
-        const {columnIndex, rowIndex} = tableMeta;
-        let data = file.data.slice(0);
-        data[rowIndex][columnIndex] = _markdown;
-        const _file = {...file, data};
-        setFile(_file);
+        const value = helpers.htmlToMarkdown(html);
+        editCell({rowIndex, columnIndex, value});
       }}
       dangerouslySetInnerHTML={{
         __html: helpers.markdownToHtml(markdown)
@@ -32,12 +31,12 @@ const FileOpenComponent = ({
   );
 };
 
-FileOpenComponent.propTypes = {
+Cell.propTypes = {
   classes: PropTypes.object.isRequired,
-  setFile: PropTypes.func.isRequired,
+  editCell: PropTypes.func.isRequired,
 };
 
 const styles = theme => ({
 });
 
-export default withStyles(styles)(FileOpenComponent);
+export default withStyles(styles)(Cell);

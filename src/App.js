@@ -1,15 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 
 import ApplicationBar from './ApplicationBar';
 import Table from './Table';
 
+import { FileContextProvider } from './File.context';
+
 const App = () => {
-  const [file, setFile] = useState({});
   return (
     <div className="App">
-      <ApplicationBar file={file} setFile={setFile} />
-      <Table file={file} setFile={setFile} />
+      <FileContextProvider>
+        <ApplicationBar />
+        <Table />
+      </FileContextProvider>
     </div>
   );
 };

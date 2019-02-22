@@ -16,7 +16,7 @@ export const tsvParse = (text) => {
   if (text) {
     const data = text.split('\n')
     .map(line => line.split('\t'))
-    .filter(line => line && line.length > 1);
+    .filter(row => row && row.length > 1);
     const columns = data.shift();
     tsv = {
       columns,

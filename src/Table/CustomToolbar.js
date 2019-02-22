@@ -12,7 +12,8 @@ import {
 import * as FileHelpers from '../FileOpen/helpers';
 
 class CustomToolbar extends React.Component {
-  handleClick = () => {
+
+  handleDownload = () => {
     const {file} = this.props;
     if (file.columns && file.data) {
       let rows = [...file.data];
@@ -28,7 +29,7 @@ class CustomToolbar extends React.Component {
     return (
       <React.Fragment>
         <Tooltip title="Download TSV">
-          <IconButton className={classes.iconButton} onClick={this.handleClick}>
+          <IconButton className={classes.iconButton} onClick={this.handleDownload}>
             <CloudDownload />
           </IconButton>
         </Tooltip>

@@ -9,32 +9,33 @@ import {
 } from '@material-ui/core';
 
 import FileOpen from './FileOpen';
+import { FileContextConsumer } from './File.context';
 
 const ApplicationBar = ({
   classes,
-  file,
-  setFile,
 }) => {
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar variant="dense">
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Open">
-            <FileOpen setFile={setFile} />
-          </IconButton>
-          <Typography variant="h6" color="inherit">
-            {file.title}
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </div>
+    <FileContextConsumer>
+    {({ file, setFile }) => (
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar variant="dense">
+            <IconButton className={classes.menuButton} color="inherit" aria-label="Open">
+              <FileOpen setFile={setFile} />
+            </IconButton>
+            <Typography variant="h6" color="inherit">
+              {file.title}
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </div>
+    )}
+    </FileContextConsumer>
   );
 };
 
 ApplicationBar.propTypes = {
   classes: PropTypes.object.isRequired,
-  file: PropTypes.object.isRequired,
-  setFile: PropTypes.func.isRequired,
 };
 
 const styles = {

@@ -1,57 +1,57 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import MUIDataTable from 'mui-datatables';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 import Cell from './Cell';
-import CustomToolbar from './CustomToolbar';
+import RowMenu from './RowMenu';
 
 const TableComponent = ({
   classes,
-  setFile,
   file,
   file: {
     title,
     columns,
     data,
   },
+  editCell,
+  options,
 }) => {
-  const [rowsPerPage, setRowsPerPage] = useState(25);
-
-  let columnConfig;
-  if (columns) {
+  let columnConfig, dataRows;
+  if (columns && data) {
+    console.log(data.length)
     columnConfig = columns.map(name => ({
       name,
       options: {
         customBodyRender: (value, tableMeta, updateValue) => (
-          <Cell value={value} tableMeta={tableMeta} file={file} setFile={setFile} />
+          <Cell value={value} tableMeta={tableMeta} editCell={editCell} />
         ),
       }
     }));
+    const actionsColumn = {
+      name: '',
+      options: {
+        sort: false,
+        filter: false,
+      },
+    };
+    columnConfig.unshift(actionsColumn);
+    dataRows = data.map((row, rowIndex) => {
+      const actionsData = (
+        <RowMenu rowIndex={rowIndex} columns={columns} row={row} />
+      );
+      let _row = [actionsData, ...row];
+      return _row;
+    });
   }
-
-  const options = {
-    // responsive: 'scroll',
-    // fixedHeader: true,
-    print: false,
-    resizableColumns: true,
-    selectableRows: false,
-    rowsPerPage: rowsPerPage,
-    rowsPerPageOptions: [25, 50, 100],
-    onChangeRowsPerPage: (numberOfRows) => {
-      setRowsPerPage(numberOfRows);
-    },
-    download: false,
-    customToolbar: () => ( <CustomToolbar file={file} /> ),
-  };
 
   return (
     <div className={classes.root}>
       <MuiThemeProvider theme={getMuiTheme()}>
         <MUIDataTable
           title={title}
-          data={data}
+          data={dataRows}
           columns={columnConfig}
           options={options}
         />
@@ -63,7 +63,7 @@ const TableComponent = ({
 TableComponent.propTypes = {
   classes: PropTypes.object.isRequired,
   file: PropTypes.object.isRequired,
-  setFile: PropTypes.func.isRequired,
+  editCell: PropTypes.func.isRequired,
 };
 
 const styles = theme => ({
