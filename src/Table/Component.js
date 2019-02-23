@@ -15,7 +15,6 @@ const TableComponent = ({
     columns,
     data,
   },
-  editCell,
   options,
 }) => {
   let columnConfig, dataRows;
@@ -25,7 +24,7 @@ const TableComponent = ({
       name,
       options: {
         customBodyRender: (value, tableMeta, updateValue) => (
-          <Cell value={value} tableMeta={tableMeta} editCell={editCell} />
+          <Cell value={value} tableMeta={tableMeta} />
         ),
       }
     }));
@@ -63,7 +62,6 @@ const TableComponent = ({
 TableComponent.propTypes = {
   classes: PropTypes.object.isRequired,
   file: PropTypes.object.isRequired,
-  editCell: PropTypes.func.isRequired,
 };
 
 const styles = theme => ({

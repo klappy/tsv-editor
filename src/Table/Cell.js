@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 import * as helpers from './helpers';
 
+import { FileContextConsumer } from '../File.context';
+
 const Cell = ({
   classes,
   value,
@@ -12,28 +14,30 @@ const Cell = ({
     columnIndex,
     rowIndex,
   },
-  editCell,
 }) => {
   const markdown = value.replace(/<br>/gi, '\n');
   return (
-    <div
-      dir="auto"
-      contentEditable
-      onBlur={(e)=>{
-        const html = e.target.innerHTML;
-        const value = helpers.htmlToMarkdown(html);
-        editCell({rowIndex, columnIndex, value});
-      }}
-      dangerouslySetInnerHTML={{
-        __html: helpers.markdownToHtml(markdown)
-      }}
-    />
+    <FileContextConsumer>
+      {({ editCell }) => (
+        <div
+          dir="auto"
+          contentEditable
+          onBlur={(e)=>{
+            const html = e.target.innerHTML;
+            const value = helpers.htmlToMarkdown(html);
+            editCell({rowIndex, columnIndex, value});
+          }}
+          dangerouslySetInnerHTML={{
+            __html: helpers.markdownToHtml(markdown)
+          }}
+        />
+      )}
+    </FileContextConsumer>
   );
 };
 
 Cell.propTypes = {
   classes: PropTypes.object.isRequired,
-  editCell: PropTypes.func.isRequired,
 };
 
 const styles = theme => ({

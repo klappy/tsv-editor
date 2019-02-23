@@ -25,10 +25,9 @@ const TableContainer = () => {
 
   return (
     <FileContextConsumer>
-      {({ file, editCell, }) => (
+      {({ file }) => (
         <TableComponent
           file={file}
-          editCell={editCell}
           options={options}
         />
       )}
