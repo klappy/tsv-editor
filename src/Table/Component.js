@@ -19,7 +19,6 @@ const TableComponent = ({
 }) => {
   let columnConfig, dataRows;
   if (columns && data) {
-    console.log(data.length)
     columnConfig = columns.map(name => ({
       name,
       options: {
