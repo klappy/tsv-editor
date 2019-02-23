@@ -1,6 +1,5 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import fileDownload from 'js-file-download';
 import {
   IconButton,
   Tooltip,
@@ -9,34 +8,28 @@ import {
   CloudDownload,
 } from '@material-ui/icons';
 
-import * as FileHelpers from '../FileOpen/helpers';
 
-class CustomToolbar extends React.Component {
+import { FileContextConsumer } from '../File.context';
 
-  handleDownload = () => {
-    const {file} = this.props;
-    if (file.columns && file.data) {
-      let rows = [...file.data];
-      rows.unshift(file.columns);
-      const tsv = FileHelpers.tsvGenerate(rows);
-      fileDownload(tsv, file.title);
-    }
-  };
+function CustomToolbar({
+  classes
+}) {
 
-  render() {
-    const { classes } = this.props;
+  return (
+    <FileContextConsumer>
+      {({ downloadFile }) => (
+        <React.Fragment>
+          <Tooltip title="Download TSV">
+            <IconButton className={classes.iconButton} onClick={downloadFile}>
+              <CloudDownload />
+            </IconButton>
+          </Tooltip>
+        </React.Fragment>
+      )}
+    </FileContextConsumer>
+  );
+}
 
-    return (
-      <React.Fragment>
-        <Tooltip title="Download TSV">
-          <IconButton className={classes.iconButton} onClick={this.handleDownload}>
-            <CloudDownload />
-          </IconButton>
-        </Tooltip>
-      </React.Fragment>
-    );
-  }
-};
 
 const styles = {
   iconButton: {}

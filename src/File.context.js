@@ -1,4 +1,7 @@
 import React, {useState} from 'react';
+import fileDownload from 'js-file-download';
+
+import * as FileHelpers from './FileOpen/helpers';
 
 // File context
 export const FileContext = React.createContext();
@@ -32,12 +35,22 @@ export function FileContextProvider({children}) {
     setFile(_file);
   };
 
+  const downloadFile = () => {
+    if (file.columns && file.data) {
+      let rows = [...file.data];
+      rows.unshift(file.columns);
+      const tsv = FileHelpers.tsvGenerate(rows);
+      fileDownload(tsv, file.title);
+    }
+  };
+
   const value = {
     file,
     setFile,
     addRow,
     deleteRow,
     editCell,
+    downloadFile,
   };
 
   return (
