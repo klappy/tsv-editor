@@ -5,7 +5,7 @@ import MUIDataTable from 'mui-datatables';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 import Cell from './Cell';
-import RowMenu from './RowMenu';
+import RowMenu from './Row/Menu';
 
 const TableComponent = ({
   classes,
@@ -37,7 +37,7 @@ const TableComponent = ({
     columnConfig.unshift(actionsColumn);
     dataRows = data.map((row, rowIndex) => {
       const actionsData = (
-        <RowMenu rowIndex={rowIndex} columns={columns} row={row} />
+        <RowMenu rowIndex={rowIndex} row={row} />
       );
       let _row = [actionsData, ...row];
       return _row;

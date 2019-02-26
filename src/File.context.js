@@ -9,15 +9,59 @@ export const FileContext = React.createContext();
 export function FileContextProvider({children}) {
   const [file, setFile] = useState({});
 
-  const addRow = ({rowIndex}) => {
+  const addRow = ({rowIndex, newRow}) => {
     let data = file.data.slice(0);
-    const columnCount = file.columns.length;
-    const row = Array(columnCount).fill('');
     let _data = [...data];
     // by request add row after index
-    _data.splice(rowIndex + 1, 0, row);
+    _data.splice(rowIndex + 1, 0, newRow);
     const _file = {...file, data: _data};
     setFile(_file);
+  };
+
+  function generateNewRow({row}) {
+    let dataIndex = {};
+    let lengthIndex = {};
+    file.data.forEach(_row => {
+      _row.forEach((value, index) => {
+        const column = file.columns[index];
+        if (!dataIndex[column]) dataIndex[column] = {};
+        if (!dataIndex[column][value]) dataIndex[column][value] = 0;
+        dataIndex[column][value] ++;
+        const valueLength = value.length;
+        if (!lengthIndex[column]) lengthIndex[column] = {};
+        if (!lengthIndex[column][valueLength]) lengthIndex[column][valueLength] = 0;
+        lengthIndex[column][valueLength] ++;
+      });
+    });
+    const rowCount = file.data.length;
+    let newRow = row.map((value, index) => {
+      const column = file.columns[index];
+      const values = Object.keys(dataIndex[column]).length;
+      const valuesRatio = values / rowCount;
+      const duplicateValue = (valuesRatio < 0.5);
+
+      const valuesLengths = Object.keys(lengthIndex[column]);
+      const valuesLengthsLength = valuesLengths.length;
+      const needRandomId = (valuesRatio > 0.99 && valuesLengthsLength <= 2);
+
+      let newValue = '';
+      if (duplicateValue) {
+        newValue = value;
+      } else if (needRandomId) {
+        const {length} = value;
+        newValue = randomId({length});
+      }
+      return newValue;
+    });
+    return newRow;
+  };
+
+  const randomId = ({length}) => {
+    const number = Math.random() // 0.9394456857981651
+    // number.toString(36); // '0.xtis06h6'
+    if (length > 9) length = 9;
+    const id = number.toString(36).substr(2, length); // 'xtis06h6'
+    return id;
   };
 
   const deleteRow = ({rowIndex}) => {
@@ -51,6 +95,7 @@ export function FileContextProvider({children}) {
     deleteRow,
     editCell,
     downloadFile,
+    generateNewRow,
   };
 
   return (
