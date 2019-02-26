@@ -28,7 +28,7 @@ const TableComponent = ({
       }
     }));
     const actionsColumn = {
-      name: '',
+      name: 'Actions',
       options: {
         sort: false,
         filter: false,
@@ -78,6 +78,7 @@ const getMuiTheme = () => createMuiTheme({
       root: {
         padding: "0 8px 0 8px",
         textAlign: "unset",
+        maxWidth: "30em",
       },
     },
     MuiTableRow: {
@@ -88,11 +89,6 @@ const getMuiTheme = () => createMuiTheme({
     MUIDataTable: {
       responsiveScroll: {
         maxHeight: 'unset',
-      },
-    },
-    MUIDataTableBodyCell: {
-      root: {
-        maxWidth: "33%",
       },
     },
   }

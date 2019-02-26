@@ -9,10 +9,10 @@ const TableContainer = () => {
   const [rowsPerPage, setRowsPerPage] = useState(25);
 
   const options = {
-    // responsive: 'scroll',
+    responsive: 'scroll',
     // fixedHeader: true,
     print: false,
-    resizableColumns: true,
+    // resizableColumns: true,
     selectableRows: false,
     rowsPerPage: rowsPerPage,
     rowsPerPageOptions: [25, 50, 100],
