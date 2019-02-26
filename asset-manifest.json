@@ -1,13 +1,13 @@
 {
   "main.css": "/tsv-editor/static/css/main.2da34b64.chunk.css",
-  "main.js": "/tsv-editor/static/js/main.c768cfd9.chunk.js",
-  "main.js.map": "/tsv-editor/static/js/main.c768cfd9.chunk.js.map",
+  "main.js": "/tsv-editor/static/js/main.4f3a9c5b.chunk.js",
+  "main.js.map": "/tsv-editor/static/js/main.4f3a9c5b.chunk.js.map",
   "runtime~main.js": "/tsv-editor/static/js/runtime~main.26919874.js",
   "runtime~main.js.map": "/tsv-editor/static/js/runtime~main.26919874.js.map",
-  "static/js/2.9b2ee97b.chunk.js": "/tsv-editor/static/js/2.9b2ee97b.chunk.js",
-  "static/js/2.9b2ee97b.chunk.js.map": "/tsv-editor/static/js/2.9b2ee97b.chunk.js.map",
+  "static/js/2.26038227.chunk.js": "/tsv-editor/static/js/2.26038227.chunk.js",
+  "static/js/2.26038227.chunk.js.map": "/tsv-editor/static/js/2.26038227.chunk.js.map",
   "index.html": "/tsv-editor/index.html",
-  "precache-manifest.888e1c12d6a1e73457482b6809f68894.js": "/tsv-editor/precache-manifest.888e1c12d6a1e73457482b6809f68894.js",
+  "precache-manifest.701236bec37337b2dd40c8d9dc47f479.js": "/tsv-editor/precache-manifest.701236bec37337b2dd40c8d9dc47f479.js",
   "service-worker.js": "/tsv-editor/service-worker.js",
   "static/css/main.2da34b64.chunk.css.map": "/tsv-editor/static/css/main.2da34b64.chunk.css.map"
 }
