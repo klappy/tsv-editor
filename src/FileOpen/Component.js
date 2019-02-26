@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import { FilePicker } from 'react-file-picker';
 import { withStyles } from '@material-ui/core/styles';
@@ -10,10 +10,12 @@ import {
 
 import * as helpers from './helpers';
 
+import { FileContext } from '../File.context';
+
 const FileOpenComponent = ({
   classes,
-  setFile,
 }) => {
+  const {setFile} = useContext(FileContext);
 
   return (
     <FilePicker
@@ -33,7 +35,6 @@ const FileOpenComponent = ({
 
 FileOpenComponent.propTypes = {
   classes: PropTypes.object.isRequired,
-  setFile: PropTypes.func.isRequired,
 };
 
 const styles = theme => ({

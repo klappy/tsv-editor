@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import * as helpers from './helpers';
 
-import { FileContextConsumer } from '../File.context';
+import { FileContext } from '../File.context';
 
 const Cell = ({
   classes,
@@ -15,24 +15,21 @@ const Cell = ({
     rowIndex,
   },
 }) => {
-  const markdown = value.replace(/<br>/gi, '\n');
+  const {editCell} = useContext(FileContext);
+
   return (
-    <FileContextConsumer>
-      {({ editCell }) => (
-        <div
-          dir="auto"
-          contentEditable
-          onBlur={(e)=>{
-            const html = e.target.innerHTML;
-            const value = helpers.htmlToMarkdown(html);
-            editCell({rowIndex, columnIndex, value});
-          }}
-          dangerouslySetInnerHTML={{
-            __html: helpers.markdownToHtml(markdown)
-          }}
-        />
-      )}
-    </FileContextConsumer>
+    <div
+      dir="auto"
+      contentEditable
+      onBlur={(e)=>{
+        const html = e.target.innerHTML;
+        const value = helpers.htmlToMarkdown(html);
+        editCell({rowIndex, columnIndex, value});
+      }}
+      dangerouslySetInnerHTML={{
+        __html: helpers.markdownToHtml(value)
+      }}
+    />
   );
 };
 

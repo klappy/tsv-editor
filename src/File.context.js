@@ -104,5 +104,3 @@ export function FileContextProvider({children}) {
     </FileContext.Provider>
   );
 };
-
-export const FileContextConsumer = FileContext.Consumer;

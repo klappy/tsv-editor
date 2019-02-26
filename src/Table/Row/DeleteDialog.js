@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   Button,
   Dialog,
@@ -6,9 +6,12 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Divider,
 } from '@material-ui/core';
 
-import { FileContextConsumer } from '../../File.context';
+import * as helpers from '../helpers';
+
+import { FileContext } from '../../File.context';
 
 function RowDelete({
   row,
@@ -17,6 +20,7 @@ function RowDelete({
   clickableComponent,
 }) {
   const [open, setOpen] = React.useState(false);
+  const {file, deleteRow} = useContext(FileContext);
 
   function handleClickOpen() {
     setOpen(true);
@@ -28,50 +32,52 @@ function RowDelete({
   }
 
   return (
-    <FileContextConsumer>
-      {({ file, deleteRow }) => (
-        <div>
-          <div onClick={handleClickOpen}>
-            {clickableComponent}
-          </div>
-          <Dialog
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogTitle id="alert-dialog-title">{"Delete this row?"}</DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-description">
-                Deleting this row is permanent. You will have to access the file that was imported to recover this data.
+    <div>
+      <div onClick={handleClickOpen}>
+        {clickableComponent}
+      </div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Delete this row?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            There is no undo feature, this is permanent.
+          </DialogContentText>
+          <Divider />
+          <br/>
+          {
+            file.columns.map((name, i) => (
+              <DialogContentText key={name + i}>
+                <strong>{name}:</strong>
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: helpers.markdownToHtml(row[i])
+                  }}
+                />
               </DialogContentText>
-              {
-                file.columns.map((name, i) => (
-                  <DialogContentText key={name + i}>
-                    <strong>{name}:</strong>
-                    { " " + row[i]}
-                  </DialogContentText>
-                ))
-              }
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose} color="primary" autoFocus>
-                Cancel
-              </Button>
-              <Button
-                onClick={() => {
-                  deleteRow({rowIndex});
-                  handleClose();
-                }}
-                color="secondary"
-              >
-                Delete
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </div>
-      )}
-    </FileContextConsumer>
+            ))
+          }
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            Cancel
+          </Button>
+          <Button
+            onClick={() => {
+              deleteRow({rowIndex});
+              handleClose();
+            }}
+            color="secondary"
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 }
 

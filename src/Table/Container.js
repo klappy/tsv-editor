@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 
 import TableComponent from './Component';
 import CustomToolbar from './CustomToolbar';
 
-import { FileContextConsumer } from '../File.context';
+import { FileContext } from '../File.context';
 
 const TableContainer = () => {
   const [rowsPerPage, setRowsPerPage] = useState(25);
+  const {file} = useContext(FileContext);
 
   const options = {
     responsive: 'scroll',
@@ -24,14 +25,10 @@ const TableContainer = () => {
   };
 
   return (
-    <FileContextConsumer>
-      {({ file }) => (
-        <TableComponent
-          file={file}
-          options={options}
-        />
-      )}
-    </FileContextConsumer>
+    <TableComponent
+      file={file}
+      options={options}
+    />
   );
 };
 

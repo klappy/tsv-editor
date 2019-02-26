@@ -8,7 +8,8 @@ turndownService.addRule('linebreaks', {
 });
 
 export const markdownToHtml = (markdown) => {
-  const html = marked(markdown, {sanitize: true});
+  const _markdown = markdown.replace(/<br>/gi, '\n');
+  const html = marked(_markdown, {sanitize: true});
   return html;
 };
 

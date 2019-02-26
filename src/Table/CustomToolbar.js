@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import {
   IconButton,
@@ -9,24 +9,21 @@ import {
 } from '@material-ui/icons';
 
 
-import { FileContextConsumer } from '../File.context';
+import { FileContext } from '../File.context';
 
 function CustomToolbar({
   classes
 }) {
+  const {downloadFile} = useContext(FileContext);
 
   return (
-    <FileContextConsumer>
-      {({ downloadFile }) => (
-        <React.Fragment>
-          <Tooltip title="Download TSV">
-            <IconButton className={classes.iconButton} onClick={downloadFile}>
-              <CloudDownload />
-            </IconButton>
-          </Tooltip>
-        </React.Fragment>
-      )}
-    </FileContextConsumer>
+    <React.Fragment>
+      <Tooltip title="Download TSV">
+        <IconButton className={classes.iconButton} onClick={downloadFile}>
+          <CloudDownload />
+        </IconButton>
+      </Tooltip>
+    </React.Fragment>
   );
 }
 

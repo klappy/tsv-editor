@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {
@@ -9,28 +9,26 @@ import {
 } from '@material-ui/core';
 
 import FileOpen from './FileOpen';
-import { FileContextConsumer } from './File.context';
+import { FileContext } from './File.context';
 
 const ApplicationBar = ({
   classes,
 }) => {
+  const {file} = useContext(FileContext);
+
   return (
-    <FileContextConsumer>
-    {({ file, setFile }) => (
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar variant="dense">
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Open">
-              <FileOpen setFile={setFile} />
-            </IconButton>
-            <Typography variant="h6" color="inherit">
-              {file.title}
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </div>
-    )}
-    </FileContextConsumer>
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar variant="dense">
+          <IconButton className={classes.menuButton} color="inherit" aria-label="Open">
+            <FileOpen/>
+          </IconButton>
+          <Typography variant="h6" color="inherit">
+            {file.title}
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 };
 
