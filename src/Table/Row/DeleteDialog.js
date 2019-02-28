@@ -9,7 +9,7 @@ import {
   Divider,
 } from '@material-ui/core';
 
-import * as helpers from '../helpers';
+import * as helpers from '../../components/MarkdownHtmlEditable/helpers';
 
 import { FileContext } from '../../File.context';
 

@@ -13,7 +13,7 @@ const TableContainer = () => {
     responsive: 'scroll',
     // fixedHeader: true,
     print: false,
-    // resizableColumns: true,
+    resizableColumns: false,
     selectableRows: false,
     rowsPerPage: rowsPerPage,
     rowsPerPageOptions: [25, 50, 100],
