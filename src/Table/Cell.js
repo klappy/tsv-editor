@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-import * as helpers from './helpers';
+import MarkdownHtmlEditable from '../components/MarkdownHtmlEditable';
 
 import { FileContext } from '../File.context';
 
@@ -18,16 +18,14 @@ const Cell = ({
   const {editCell} = useContext(FileContext);
 
   return (
-    <div
-      dir="auto"
-      contentEditable
-      onBlur={(e)=>{
-        const html = e.target.innerHTML;
-        const value = helpers.htmlToMarkdown(html);
-        editCell({rowIndex, columnIndex, value});
-      }}
-      dangerouslySetInnerHTML={{
-        __html: helpers.markdownToHtml(value)
+    <MarkdownHtmlEditable
+      style={{ padding: '0.5em' }}
+      raw={false}
+      markdown={value}
+      inputFilters={[[/<br>/gi, '\n']]}
+      outputFilters={[['\n', '<br>']]}
+      handleChange={(markdown) => {
+        editCell({rowIndex, columnIndex, value: markdown});
       }}
     />
   );

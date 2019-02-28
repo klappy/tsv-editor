@@ -21,7 +21,7 @@ const ApplicationBar = ({
       <AppBar position="static">
         <Toolbar variant="dense">
           <IconButton className={classes.menuButton} color="inherit" aria-label="Open">
-            <FileOpen/>
+            <FileOpen />
           </IconButton>
           <Typography variant="h6" color="inherit">
             {file.title}

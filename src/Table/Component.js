@@ -46,7 +46,7 @@ const TableComponent = ({
 
   return (
     <div className={classes.root}>
-      <MuiThemeProvider theme={getMuiTheme()}>
+      <MuiThemeProvider theme={getMuiTheme}>
         <MUIDataTable
           title={title}
           data={dataRows}
@@ -69,7 +69,7 @@ const styles = theme => ({
   },
 });
 
-const getMuiTheme = () => createMuiTheme({
+const getMuiTheme = createMuiTheme({
   typography: {
     useNextVariants: true,
   },
