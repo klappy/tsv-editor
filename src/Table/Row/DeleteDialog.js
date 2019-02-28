@@ -9,8 +9,6 @@ import {
   Divider,
 } from '@material-ui/core';
 
-import * as helpers from '../../components/MarkdownHtmlEditable/helpers';
-
 import { FileContext } from '../../File.context';
 
 function RowDelete({
@@ -53,11 +51,9 @@ function RowDelete({
             file.columns.map((name, i) => (
               <DialogContentText key={name + i}>
                 <strong>{name}:</strong>
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: helpers.markdownToHtml(row[i])
-                  }}
-                />
+                <span>
+                  {row[i]}
+                </span>
               </DialogContentText>
             ))
           }

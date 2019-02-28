@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-import MarkdownHtmlEditable from '../components/MarkdownHtmlEditable';
+import MarkdownHtmlEditable from '@bit/unfoldingword.resources.markdown-html-editable';
 
 import { FileContext } from '../File.context';
 
