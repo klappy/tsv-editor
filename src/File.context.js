@@ -9,6 +9,30 @@ export const FileContext = React.createContext();
 export function FileContextProvider({children}) {
   const [file, setFile] = useState({});
 
+  const moveRowUp = ({rowIndex}) => {
+    const data = arrayMove(file.data, rowIndex, rowIndex - 1);
+    let _file = {...file, data};
+    setFile(_file);
+  };
+
+  const moveRowDown = ({rowIndex}) => {
+    const data = arrayMove(file.data, rowIndex, rowIndex + 1);
+    let _file = {...file, data};
+    setFile(_file);
+  };
+
+  const arrayMove = (array, oldIndex, newIndex) => {
+    let _array = [...array];
+    const tooLow = (newIndex < 0);
+    const tooHigh = (newIndex > array.length - 1);
+    if (!tooLow && !tooHigh) {
+      var element = _array[oldIndex];
+      _array.splice(oldIndex, 1);
+      _array.splice(newIndex, 0, element);
+    }
+    return _array;
+  };
+
   const addRow = ({rowIndex, newRow}) => {
     let data = file.data.slice(0);
     let _data = [...data];
@@ -96,6 +120,8 @@ export function FileContextProvider({children}) {
     editCell,
     downloadFile,
     generateNewRow,
+    moveRowUp,
+    moveRowDown,
   };
 
   return (

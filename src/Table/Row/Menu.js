@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   IconButton,
   Menu,
@@ -10,16 +10,21 @@ import {
   MoreVert,
   AddCircle,
   RemoveCircle,
+  ArrowDropUp,
+  ArrowDropDown,
 } from '@material-ui/icons';
 
 import AddDialog from './AddDialog';
 import DeleteDialog from './DeleteDialog';
+
+import {FileContext} from '../../File.context';
 
 function RowMenu({
   rowIndex,
   row,
 }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const {moveRowUp, moveRowDown} = useContext(FileContext);
   const open = Boolean(anchorEl);
 
   function handleClick(event) {
@@ -28,6 +33,16 @@ function RowMenu({
 
   function handleClose() {
     setAnchorEl(null);
+  }
+
+  function handleMoveUp() {
+    moveRowUp({rowIndex});
+    handleClose();
+  }
+
+  function handleMoveDown() {
+    moveRowDown({rowIndex});
+    handleClose();
   }
 
   return (
@@ -47,6 +62,16 @@ function RowMenu({
         open={open}
         onClose={handleClose}
       >
+        <MenuItem
+          onClick={handleMoveUp}
+        >
+          <ListItemIcon>
+            <ArrowDropUp />
+          </ListItemIcon>
+          <Typography>
+            Move Up
+          </Typography>
+        </MenuItem>
         <AddDialog
           row={row}
           rowIndex={rowIndex}
@@ -77,6 +102,16 @@ function RowMenu({
             </MenuItem>
           }
         />
+        <MenuItem
+          onClick={handleMoveDown}
+        >
+          <ListItemIcon>
+            <ArrowDropDown />
+          </ListItemIcon>
+          <Typography>
+            Move Down
+          </Typography>
+        </MenuItem>
       </Menu>
     </div>
   );

@@ -10,7 +10,6 @@ export function RawContextProvider({children}) {
     setRaw(!raw)
   };
 
-
   const value = {
     raw,
     toggleRaw,
