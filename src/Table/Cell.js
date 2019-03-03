@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import MarkdownHtmlEditable from '@bit/unfoldingword.resources.markdown-html-editable';
 
 import { FileContext } from '../File.context';
+import { RawContext } from './Raw.context';
 
 const Cell = ({
   classes,
@@ -16,11 +17,14 @@ const Cell = ({
   },
 }) => {
   const {editCell} = useContext(FileContext);
+  const {raw} = useContext(RawContext);
+
+  let style = { padding: '0.5em' };
 
   return (
     <MarkdownHtmlEditable
-      style={{ padding: '0.5em' }}
-      raw={false}
+      style={style}
+      raw={raw}
       markdown={value}
       inputFilters={[[/<br>/gi, '\n']]}
       outputFilters={[['\n', '<br>']]}

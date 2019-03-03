@@ -15,6 +15,7 @@ const TableComponent = ({
     columns,
     data,
   },
+  raw,
   options,
 }) => {
   let columnConfig, dataRows;
@@ -23,7 +24,7 @@ const TableComponent = ({
       name,
       options: {
         customBodyRender: (value, tableMeta, updateValue) => (
-          <Cell value={value} tableMeta={tableMeta} />
+          <Cell value={value} tableMeta={tableMeta} raw={raw} />
         ),
       }
     }));

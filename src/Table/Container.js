@@ -4,6 +4,7 @@ import TableComponent from './Component';
 import CustomToolbar from './CustomToolbar';
 
 import { FileContext } from '../File.context';
+import { RawContextProvider } from './Raw.context';
 
 const TableContainer = () => {
   const [rowsPerPage, setRowsPerPage] = useState(25);
@@ -25,10 +26,12 @@ const TableContainer = () => {
   };
 
   return (
-    <TableComponent
-      file={file}
-      options={options}
-    />
+    <RawContextProvider>
+      <TableComponent
+        file={file}
+        options={options}
+      />
+    </RawContextProvider>
   );
 };
 
