@@ -22,7 +22,7 @@ const TableContainer = ({classes}) => {
 
   const options = {
     responsive: 'scroll',
-    // fixedHeader: true,
+    fixedHeader: true,
     print: false,
     resizableColumns: false,
     selectableRows: false,

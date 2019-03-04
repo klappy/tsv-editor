@@ -91,6 +91,21 @@ const getMuiTheme = createMuiTheme({
     MUIDataTable: {
       responsiveScroll: {
         maxHeight: 'unset',
+        overflowX: 'unset',
+        overflowY: 'unset',
+      },
+    },
+    MuiToolbar: {
+      root: {
+        top: 0,
+        position: 'sticky',
+        background: 'white',
+        zIndex: '100',
+      },
+    },
+    MUIDataTableHeadCell: {
+      fixedHeader: {
+        top: '62px',
       },
     },
   }
