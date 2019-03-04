@@ -107,6 +107,9 @@ const getMuiTheme = createMuiTheme({
       fixedHeader: {
         top: '62px',
       },
+      toolButton: {
+        whiteSpace: 'nowrap',
+      },
     },
   }
 });
