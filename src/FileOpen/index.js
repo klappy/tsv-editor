@@ -1,2 +1,2 @@
-import Component from './Component';
-export default Component;
+import FileOpen from './FileOpen';
+export default FileOpen;

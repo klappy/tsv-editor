@@ -12,7 +12,7 @@ import * as helpers from './helpers';
 
 import { FileContext } from '../File.context';
 
-const FileOpenComponent = ({
+const FileOpen = ({
   classes,
 }) => {
   const {setFile} = useContext(FileContext);
@@ -33,7 +33,7 @@ const FileOpenComponent = ({
   );
 };
 
-FileOpenComponent.propTypes = {
+FileOpen.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
@@ -43,4 +43,4 @@ const styles = theme => ({
   },
 });
 
-export default withStyles(styles)(FileOpenComponent);
+export default withStyles(styles)(FileOpen);

@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 
 import ApplicationBar from './ApplicationBar';
+import Start from './Start';
 import Table from './Table';
 
 import { FileContextProvider } from './File.context';
@@ -11,6 +12,7 @@ const App = () => {
     <div className="App">
       <FileContextProvider>
         <ApplicationBar />
+        <Start />
         <Table />
       </FileContextProvider>
     </div>

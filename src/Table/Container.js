@@ -1,12 +1,22 @@
-import React, {useState, useContext} from 'react';
+import React, {
+  useState,
+  useContext,
+  Suspense,
+  lazy,
+} from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import {
+  CircularProgress,
+} from '@material-ui/core';
 
-import TableComponent from './Component';
 import CustomToolbar from './CustomToolbar';
 
 import { FileContext } from '../File.context';
 import { RawContextProvider } from './Raw.context';
 
-const TableContainer = () => {
+const TableComponent = lazy(() => Promise.resolve().then(() => require('./Component')));
+
+const TableContainer = ({classes}) => {
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const {file} = useContext(FileContext);
 
@@ -25,14 +35,37 @@ const TableContainer = () => {
     customToolbar: () => ( <CustomToolbar /> ),
   };
 
-  return (
+  const loadingComponent = (
+    <CircularProgress className={classes.progress} color="primary" disableShrink />
+  );
+
+  const tableComponent = (
     <RawContextProvider>
-      <TableComponent
-        file={file}
-        options={options}
-      />
+      <Suspense fallback={loadingComponent}>
+        <TableComponent
+          file={file}
+          options={options}
+        />
+      </Suspense>
     </RawContextProvider>
   );
+
+  let component = <div />;
+  if (Object.keys(file).length > 0) {
+    component = tableComponent;
+  }
+
+  return component;
 };
 
-export default TableContainer;
+const styles = theme => ({
+  root: {
+    width: '100%',
+  },
+  progress: {
+    margin: 'auto',
+    display: 'block',
+  },
+});
+
+export default withStyles(styles)(TableContainer);

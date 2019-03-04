@@ -6,6 +6,7 @@ import {
   Toolbar,
   Typography,
   IconButton,
+  Tooltip,
 } from '@material-ui/core';
 
 import FileOpen from './FileOpen';
@@ -15,16 +16,19 @@ const ApplicationBar = ({
   classes,
 }) => {
   const {file} = useContext(FileContext);
-
+  const label = 'Open local .tsv file';
+  const title = 'TSV/MD Editor'
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar variant="dense">
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Open">
-            <FileOpen />
-          </IconButton>
+          <Tooltip title={label} aria-label="Add">
+            <IconButton className={classes.menuButton} color="inherit" aria-label="Open">
+              <FileOpen />
+            </IconButton>
+          </Tooltip>
           <Typography variant="h6" color="inherit">
-            {file.title}
+            {file.title || title}
           </Typography>
         </Toolbar>
       </AppBar>
