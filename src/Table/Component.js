@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import MUIDataTable from 'mui-datatables';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-
+import {
+} from '@material-ui/icons';
 import Cell from './Cell';
 import RowMenu from './Row/Menu';
 
@@ -31,16 +32,16 @@ const TableComponent = ({
     const actionsColumn = {
       name: 'Actions',
       options: {
-        sort: false,
+        sort: true,
         filter: false,
+        customBodyRender: (value, tableMeta, updateValue) => (
+          <RowMenu rowIndex={value} row={file.data[value]} />
+        ),
       },
     };
     columnConfig.unshift(actionsColumn);
     dataRows = data.map((row, rowIndex) => {
-      const actionsData = (
-        <RowMenu rowIndex={rowIndex} row={row} />
-      );
-      let _row = [actionsData, ...row];
+      let _row = [rowIndex, ...row];
       return _row;
     });
   }
