@@ -27,8 +27,9 @@ const Cell = ({
       raw={raw}
       markdown={value}
       inputFilters={[[/<br>/gi, '\n']]}
-      outputFilters={[['\n', '<br>']]}
+      outputFilters={[[/\n/gi, '<br>']]}
       handleChange={(markdown) => {
+        debugger
         editCell({rowIndex, columnIndex, value: markdown});
       }}
     />

@@ -14,7 +14,7 @@
     "react-scripts": "2.1.5",
     "showdown": "^1.9.0",
     "turndown": "^5.0.3",
-    "@bit/unfoldingword.resources.markdown-html-editable": "0.1.9"
+    "@bit/unfoldingword.resources.markdown-html-editable": "0.1.10"
   },
   "scripts": {
     "start": "react-scripts start",
