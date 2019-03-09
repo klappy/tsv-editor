@@ -89,6 +89,9 @@ const getMuiTheme = createMuiTheme({
       }
     },
     MUIDataTable: {
+      root: {
+
+      },
       responsiveScroll: {
         maxHeight: 'unset',
         overflowX: 'unset',
@@ -109,6 +112,13 @@ const getMuiTheme = createMuiTheme({
       },
       toolButton: {
         whiteSpace: 'nowrap',
+      },
+    },
+    MuiTable: {
+      root: {
+        position: 'sticky',
+        bottom: 0,
+        background: 'white',
       },
     },
   }
